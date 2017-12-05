@@ -1,0 +1,23 @@
+{
+  "name": "space-ex",
+  "version": "1.0.0",
+  "description": "airbnb for every other kind of space",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Deluge/Space-Ex.git"
+  },
+  "keywords": [
+    "space",
+    "ex"
+  ],
+  "author": "Team Deluge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Team-Deluge/Space-Ex/issues"
+  },
+  "homepage": "https://github.com/Team-Deluge/Space-Ex#readme"
+}
