@@ -12,5 +12,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('contents')
+  document.getElementById('contents'),
 );
