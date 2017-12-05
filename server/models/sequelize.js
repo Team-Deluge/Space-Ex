@@ -12,4 +12,6 @@ const sequelize = new Sequelize('SpaceEx', 'deluge', 'password', {
   },
 });
 
+sequelize.sync();
+
 module.exports = sequelize;
