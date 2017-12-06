@@ -1714,7 +1714,7 @@ function isPlainObject(value) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addSpace = exports.deleteSpace = exports.getSpaces = exports.logoutUser = exports.receiveLogout = exports.requestLogout = exports.loginError = exports.receiveLogin = exports.requestLogin = undefined;
+exports.getConfirmedEvents = exports.addSpace = exports.deleteSpace = exports.getSpaces = exports.logoutUser = exports.receiveLogout = exports.requestLogout = exports.loginError = exports.receiveLogin = exports.requestLogin = undefined;
 
 var _actionTypes = __webpack_require__(120);
 
@@ -1795,6 +1795,14 @@ var addSpace = exports.addSpace = function addSpace(user_id) {
   return {
     type: types.ADD_SPACE,
     user_id: user_id
+  };
+};
+
+var getConfirmedEvents = exports.getConfirmedEvents = function getConfirmedEvents(user_id, userType) {
+  return {
+    type: types.GET_CONFIRMED_EVENTS,
+    user_id: user_id,
+    userType: userType
   };
 };
 
@@ -26104,6 +26112,11 @@ var LOGOUT_FAILURE = exports.LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 var GET_SPACES = exports.GET_SPACES = 'GET_SPACES';
 var DELETE_SPACE = exports.DELETE_SPACE = 'DELETE_SPACE';
 var ADD_SPACE = exports.ADD_SPACE = 'ADD_SPACE';
+var GET_CONFIRMED_EVENTS = exports.GET_CONFIRMED_EVENTS = 'GET_CONFIRMED_EVENTS';
+var GET_UNCONFIRMED_EVENTS = exports.GET_UNCONFIRMED_EVENTS = 'GET_UNCONFIRMED_EVENTS';
+var ADD_EVENT = exports.ADD_EVENT = 'ADD_EVENT';
+var CONFIRM_EVENT = exports.CONFIRM_EVENT = 'CONFIRM_EVENT';
+var DELETE_EVENT = exports.DELETE_EVENT = 'DELETE_EVENT';
 
 /***/ }),
 /* 121 */
@@ -26224,9 +26237,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(24);
 
-var _actions = __webpack_require__(26);
+var _actionTypes = __webpack_require__(120);
 
-var types = _interopRequireWildcard(_actions);
+var types = _interopRequireWildcard(_actionTypes);
 
 var _spaceReducer = __webpack_require__(125);
 
@@ -26296,9 +26309,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _actions = __webpack_require__(26);
+var _actionTypes = __webpack_require__(120);
 
-var types = _interopRequireWildcard(_actions);
+var types = _interopRequireWildcard(_actionTypes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 

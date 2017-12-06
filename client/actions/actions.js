@@ -59,3 +59,10 @@ export const addSpace = user_id => ({
   type: types.ADD_SPACE,
   user_id,
 });
+
+export const getConfirmedEvents = (user_id, userType) => ({
+  type: types.GET_CONFIRMED_EVENTS,
+  user_id,
+  userType,
+});
+

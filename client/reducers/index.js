@@ -1,6 +1,6 @@
 // import all reducer js files
 import { combineReducers } from 'redux';
-import * as types from '../actions/actions';
+import * as types from '../constants/actionTypes';
 import spaceReducer from './spaceReducer';
 
 // each reducer should have its initial state within its js file.

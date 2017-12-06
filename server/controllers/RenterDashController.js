@@ -17,7 +17,7 @@ const findConfirmedEvents = (req, res) => {
 const findPendingEvents = (req, res) => {
   Event.findAll({
     where: {
-      renter_user_id: req.body.user_id,
+      RenterID: req.body.user_id,
       confirmed: false,
     },
   }).then((data) => {
@@ -28,8 +28,8 @@ const findPendingEvents = (req, res) => {
 const createEvent = (req, res) => {
   Event.create({
     title: req.body.title,
-    owner_user_id: req.body.owner_user_id,
-    renter_user_id: req.body.renter_user_id,
+    OwnerID: req.body.owner_user_id,
+    RenterID: req.body.renter_user_id,
     space_id: req.body.space_id,
     start: req.body.start,
     end: req.body.end,
@@ -53,7 +53,7 @@ const deleteEvent = (req, res) => {
 
 const findMessages = (req, res) => {
   Message.findAll({
-    where: { renter_user_id: req.body.user_id },
+    where: { RenterID: req.body.user_id },
   }).then((data) => {
     res.json(data);
   });
@@ -61,8 +61,8 @@ const findMessages = (req, res) => {
 
 const createMessage = (req, res) => {
   Message.create({
-    owner_user_id: req.body.owner_user_id,
-    renter_user_id: req.body.renter_user_id,
+    OwnerID: req.body.owner_user_id,
+    RenterID: req.body.renter_user_id,
     space_id: req.body.space_id,
     message: req.body.message,
   }).then((data) => {

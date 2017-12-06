@@ -1,4 +1,4 @@
-import * as types from '../actions/actions';
+import * as types from '../constants/actionTypes';
 
 const spaceReducer = (state = { spaces: [] }, action) => {
   switch (action.type) {

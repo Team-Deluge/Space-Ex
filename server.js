@@ -15,4 +15,6 @@ app.get('/deleteSpace', OwnerDashController.deleteSpace, OwnerDashController.fin
 
 app.get('/addSpace', OwnerDashController.addSpace, OwnerDashController.findSpaces);
 
+app.get('/getConfirmedEvents', OwnerDashController.findConfirmedEvents);
+
 app.listen(3000);
