@@ -62,7 +62,7 @@ const findSpaces = (req, res) => {
   });
 };
 
-const addSpace = (req, res) => {
+const addSpace = (req, res, next) => {
   Space.create({
     name: req.body.name,
     location: req.body.location,
@@ -71,19 +71,15 @@ const addSpace = (req, res) => {
     picture: req.body.picture,
     tags: req.body.tags,
     owner_user_id: req.body.owner_user_id,
-  }).then((data) => {
-    res.json(data);
-  });
+  }).then(next());
 };
 
-const deleteSpace = (req, res) => {
+const deleteSpace = (req, res, next) => {
   Space.findOne({
     where: { _id: req.body.space_id },
   }).then((space) => {
     space.destroy({ force: true });
-  }).then((data) => {
-    res.json(data);
-  });
+  }).then(next());
 };
 
 // MESSAGE CONTROLLERS
