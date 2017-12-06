@@ -25958,7 +25958,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     loginUser: function loginUser(userInfo) {
-      console.log(userInfo);
       dispatch((0, _auth2.default)(userInfo));
     }
   };
@@ -26027,7 +26026,7 @@ var Login = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick() {
-                return console.log(_this2.state);
+                return _this2.props.loginUser({ username: _this2.state.username, password: _this2.state.password });
               } },
             'Login'
           ),
@@ -26104,7 +26103,7 @@ var loginUser = function loginUser(creds) {
   return function (dispatch) {
     dispatch((0, _actions.requestLogin)(creds));
 
-    return fetch('http://localhost:3000/sessions/create', config).then(function (response) {
+    return fetch('http://localhost:3000/user/find', config).then(function (response) {
       response.json().then(function (user) {
         return { user: user, response: response };
       }).then(function (_ref) {
