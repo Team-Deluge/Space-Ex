@@ -25466,11 +25466,6 @@ var App = function App() {
     'div',
     null,
     React.createElement(
-      'div',
-      null,
-      ' CAN YOU SEE ME ? '
-    ),
-    React.createElement(
       Switch,
       null,
       React.createElement(Route, { exact: true, path: '/', component: Login }),
@@ -25490,58 +25485,7 @@ module.exports = App;
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var React = __webpack_require__(1);
-
-var Signup = function (_React$Component) {
-  _inherits(Signup, _React$Component);
-
-  function Signup() {
-    _classCallCheck(this, Signup);
-
-    return _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).apply(this, arguments));
-  }
-
-  _createClass(Signup, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      fetch('/signup', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          userName: 'testUser',
-          password: 'testPassword',
-          email: 'testEmail@gmail.com',
-          phone: '555-555-5555',
-          user: 'renter',
-          rating: 4.4
-        })
-      }).then(function (data) {
-        console.log(data);
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'div',
-        null,
-        'this is a signup pabe'
-      );
-    }
-  }]);
-
-  return Signup;
-}(React.Component);
 
 module.exports = Signup;
 

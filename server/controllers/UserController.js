@@ -4,23 +4,6 @@ const User = require('../models/User');
 // the user and a boolean, which will be true if the user was created and false if the user
 // already exists.
 
-// const createUser = (req, res) => {
-//   User.findOrCreate({
-//     where: {
-//       userName: 'test1',
-//     },
-//     defaults: {
-//       userName: 'test1',
-//       password: 'pass1',
-//       email: 'test1',
-//       phone: 'test1',
-//       user: 'test1',
-//       rating: 3.2,
-//     },
-//   }).then((data) => {
-//     res.json(data);
-//   });
-// };
 
 const createUser = (req, res) => {
   User.findOrCreate({

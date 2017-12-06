@@ -7,7 +7,6 @@ const Login = require('./Login');
 
 const App = () => (
   <div>
-    <div> CAN YOU SEE ME ? </div>
     <Switch>
       <Route exact path="/" component={Login} />
       <Route path="/signup" component={Signup} />
