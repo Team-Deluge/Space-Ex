@@ -7,7 +7,6 @@ import loginUser from '../actions/auth';
 
 const mapDispatchToProps = dispatch => ({
   loginUser(userInfo) {
-    console.log(userInfo);
     dispatch(loginUser(userInfo));
   },
 });
@@ -49,7 +48,7 @@ class Login extends React.Component {
           <br />
 
           {/* login post request reducer to database goes here */}
-          <button onClick={()=>console.log(this.state)}>
+          <button onClick={() => this.props.loginUser({ username: this.state.username, password: this.state.password })}>
 
             Login
           </button>

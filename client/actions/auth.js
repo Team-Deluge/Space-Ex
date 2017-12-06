@@ -10,7 +10,7 @@ const loginUser = (creds) => {
   return (dispatch) => {
     dispatch(requestLogin(creds));
 
-    return fetch('http://localhost:3000/sessions/create', config)
+    return fetch('http://localhost:3000/user/find', config)
       .then((response) => {
         response.json().then(user => ({ user, response }))
           .then(({ user, res }) => {
