@@ -11,3 +11,4 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 export const GET_SPACES = 'GET_SPACES';
 export const DELETE_SPACE = 'DELETE_SPACE';
 export const ADD_SPACE = 'ADD_SPACE';
+export const SIGN_UP = 'SIGN_UP';

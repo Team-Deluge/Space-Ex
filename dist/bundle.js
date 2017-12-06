@@ -1024,7 +1024,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addSpace = exports.deleteSpace = exports.getSpaces = exports.logoutUser = exports.receiveLogout = exports.requestLogout = exports.loginError = exports.receiveLogin = exports.requestLogin = undefined;
+exports.addSpace = exports.deleteSpace = exports.getSpaces = exports.logoutUser = exports.receiveLogout = exports.requestLogout = exports.loginError = exports.receiveLogin = exports.requestLogin = exports.requestSignup = undefined;
 
 var _actionTypes = __webpack_require__(122);
 
@@ -1034,6 +1034,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 // export action creators, which will be used by
 
+var requestSignup = exports.requestSignup = function requestSignup(data) {
+  return {
+    type: types.SIGN_UP,
+    payload: data
+  };
+}; // this file contains all Action Creator functions; It imports action types from actionTypes.js
+
 var requestLogin = exports.requestLogin = function requestLogin(creds) {
   return {
     type: types.LOGIN_REQUEST,
@@ -1041,7 +1048,7 @@ var requestLogin = exports.requestLogin = function requestLogin(creds) {
     isAuthenticated: false,
     payload: creds
   };
-}; // this file contains all Action Creator functions; It imports action types from actionTypes.js
+};
 
 var receiveLogin = exports.receiveLogin = function receiveLogin(user) {
   return {
@@ -25625,6 +25632,8 @@ var _reactRouterDom = __webpack_require__(6);
 
 var _reactRedux = __webpack_require__(7);
 
+var _actions = __webpack_require__(15);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -25638,8 +25647,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     // reducers go here (signup post request)
-    signup: dispatch.signup
+    signup: function signup(data) {
+      dispatch((0, _actions.requestSignup)(data));
+    }
   };
+};
+
+var mapStateToProps = function mapStateToProps() {
+  return {};
 };
 
 var Signup = function (_React$Component) {
@@ -25658,7 +25673,6 @@ var Signup = function (_React$Component) {
       userType: 'Owner'
     };
     _this.handleChange = _this.handleChange.bind(_this);
-    _this.signup = _this.signup.bind(_this);
     return _this;
   }
 
@@ -25667,9 +25681,33 @@ var Signup = function (_React$Component) {
     value: function handleChange(name, event) {
       this.setState(_defineProperty({}, name, event.target.value));
     }
+
+    // signup() {
+    //   const config = {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //       userName: this.state.username,
+    //       password: this.state.password,
+    //       email: this.state.email,
+    //       phone: this.state.phone,
+    //       user: this.state.userType,
+    //     }),
+    //   };
+
+    // fetch('http://localhost:3000/signup', config)
+    //   .then((response) => {
+    //     response.json()
+    //       .then(data => console.log(data));
+    //   }).catch(err => console.log(err));
+    // }
+
+
   }, {
-    key: 'signup',
-    value: function signup() {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
       var config = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25681,19 +25719,6 @@ var Signup = function (_React$Component) {
           user: this.state.userType
         })
       };
-
-      fetch('http://localhost:3000/signup', config).then(function (response) {
-        response.json().then(function (data) {
-          return console.log(data);
-        });
-      }).catch(function (err) {
-        return console.log(err);
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
 
       return _react2.default.createElement(
         'div',
@@ -25779,7 +25804,7 @@ var Signup = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick() {
-                return _this2.props.signup();
+                return _this2.props.signup(config);
               } },
             'Signup'
           ),
@@ -25797,7 +25822,7 @@ var Signup = function (_React$Component) {
   return Signup;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRedux.connect)(mapDispatchToProps)(Signup);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Signup);
 
 /***/ }),
 /* 115 */
@@ -26295,6 +26320,7 @@ var LOGOUT_FAILURE = exports.LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 var GET_SPACES = exports.GET_SPACES = 'GET_SPACES';
 var DELETE_SPACE = exports.DELETE_SPACE = 'DELETE_SPACE';
 var ADD_SPACE = exports.ADD_SPACE = 'ADD_SPACE';
+var SIGN_UP = exports.SIGN_UP = 'SIGN_UP';
 
 /***/ }),
 /* 123 */
@@ -26581,13 +26607,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(25);
 
-var _actions = __webpack_require__(15);
+var _actionTypes = __webpack_require__(122);
 
-var types = _interopRequireWildcard(_actions);
+var types = _interopRequireWildcard(_actionTypes);
 
 var _spaceReducer = __webpack_require__(128);
 
 var _spaceReducer2 = _interopRequireDefault(_spaceReducer);
+
+var _userReducer = __webpack_require__(129);
+
+var _userReducer2 = _interopRequireDefault(_userReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26597,6 +26627,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // Use a default parameter to pass this into reducer.
 // reducers take the current state and an action object as parameters.
 // reducers then have a switch statement with cases for each action type (from actionTypes.js).
+// import all reducer js files
 function auth() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     isFetching: false,
@@ -26631,13 +26662,13 @@ function auth() {
     default:
       return state;
   }
-} // import all reducer js files
-
+}
 
 var reducers = (0, _redux.combineReducers)({
   // list all reducers here
   auth: auth,
-  spaceReducer: _spaceReducer2.default
+  spaceReducer: _spaceReducer2.default,
+  signupReducer: _userReducer2.default
 });
 
 exports.default = reducers;
@@ -26697,6 +26728,44 @@ var spaceReducer = function spaceReducer() {
 };
 
 exports.default = spaceReducer;
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _actionTypes = __webpack_require__(122);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function signupReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.SIGN_UP:
+      fetch('http://localhost:3000/signup', action.payload).then(function (response) {
+        response.json().then(function (data) {
+          return console.log(data);
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+      return null;
+    default:
+      return state;
+  }
+}
+
+exports.default = signupReducer;
 
 /***/ })
 /******/ ]);
