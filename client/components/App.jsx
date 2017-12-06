@@ -1,3 +1,4 @@
+
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
@@ -19,4 +20,4 @@ const App = () => (
   </div>
 );
 
-export default App;
+module.exports = App;
