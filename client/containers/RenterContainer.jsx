@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RenterRes from '../components/RenterRes'
 // import * as actions from '../actions/actions';
 
 const mapStateToProps = store => ({
@@ -15,6 +16,9 @@ const RenterContainer = (props) => {
       <h2>
         Welcome Renter {props.username} !!!
       </h2>
+      <RenterRes
+        // put in props here
+      />
     </div>
   );
 }

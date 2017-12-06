@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/actions';
@@ -13,7 +14,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = () => ({});
 
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -27,24 +27,40 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="login">
         <h4>Login</h4>
         <h4>
           Username:
-          <input type="text" value={this.state.username} onChange={e => this.handleChange('username', e)} />
+
+          <input
+            type="text"
+            value={this.state.username}
+            onChange={e => this.handleChange('username', e)}
+          />
         </h4>
         <h4>
           Password:
-          <input type="text" value={this.state.password} onChange={e => this.handleChange('password', e)} />
+          <input
+            type="text"
+            value={this.state.password}
+            onChange={e => this.handleChange('password', e)}
+          />
           <br />
           <br />
-          <button onClick={() => this.props.loginUser({ username: this.state.username, password: this.state.password })}>
+
+          {/* login post request reducer to database goes here */}
+          <button onClick={()=>console.log(this.state)}>
+
             Login
           </button>
           Not a user?
           <Link to='/signup'>Signup</Link>
+
+          {/* FIX: temp links to Owner and Renter Container */}
           <br/>
-          <Link to='/owner'>OwnerContainer</Link>          <br/>
+          <br/>
+          <Link to='/owner'>OwnerContainer</Link>
+          <br/>
           <Link to='/renter'>RenterContainer</Link>
 
         </h4>
@@ -54,3 +70,4 @@ class Login extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
