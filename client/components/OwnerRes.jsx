@@ -2,12 +2,11 @@
 import React from 'react';
 
 const OwnerRes = (props) => {
-  console.log(props.reservationList)
+  // console.log('INSIDE OWNER RES')
+  // console.log(props)
   return (
     <div>
-      <h2>
-        This is OwnerRes !!!
-      </h2>
+        this be ownerres
     </div>
   );
 };

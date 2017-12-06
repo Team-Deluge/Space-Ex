@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/dist`));
 
 app.post('/signup', UserController.createUser);
+app.post('/user/find', UserController.findUser);
 
 app.get('/getSpaces', OwnerDashController.findSpaces);
 

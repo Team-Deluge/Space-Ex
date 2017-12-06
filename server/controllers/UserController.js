@@ -27,11 +27,13 @@ const createUser = (req, res) => {
 const findUser = (req, res) => {
   User.findOne({
     where: {
-      userName: req.body.userName,
+      userName: req.body.username,
       password: req.body.password,
     },
   }).then((data) => {
-    res.json(data);
+    if (!data) return res.status(400).send('No user found');
+    const user = { id_token: data._id };
+    res.status(200).send(user);
   });
 };
 
