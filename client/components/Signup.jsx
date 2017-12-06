@@ -2,11 +2,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { requestSignup } from '../actions/actions';
 
 const mapDispatchToProps = dispatch => ({
   // reducers go here (signup post request)
-  signup: dispatch.signup
+  signup(data) {
+    dispatch(requestSignup(data));
+  },
 });
+
+const mapStateToProps = () => ({});
 
 class Signup extends React.Component {
   constructor(props) {
@@ -19,14 +24,13 @@ class Signup extends React.Component {
       userType: 'Owner',
     };
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
   }
 
   handleChange(name, event) {
     this.setState({ [name]: event.target.value });
   }
 
-  signup() {
+  render() {
     const config = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -39,15 +43,6 @@ class Signup extends React.Component {
       }),
     };
 
-    fetch('http://localhost:3000/signup', config)
-      .then((response) => {
-        response.json()
-          .then(data => console.log(data));
-      }).catch(err => console.log(err));
-  }
-
-
-  render() {
     return (
       <div id="sign-up">
         <h3>Signup</h3>
@@ -94,7 +89,7 @@ class Signup extends React.Component {
           <br />
 
           {/* post request (reducers) to signup goes in this button */}
-          <button onClick={() => this.props.signup()}>
+          <button onClick={() => this.props.signup(config)}>
             Signup
           </button>
           Already a user?
@@ -105,4 +100,4 @@ class Signup extends React.Component {
   }
 }
 
-export default connect(mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
