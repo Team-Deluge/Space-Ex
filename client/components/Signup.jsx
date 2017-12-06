@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const mapDispatchToProps = dispatch => ({
   // reducers go here (signup post request)
-  dispatch(signup)
+  signup: dispatch.signup
 });
 
 class Signup extends React.Component {
@@ -94,7 +94,7 @@ class Signup extends React.Component {
           <br />
 
           {/* post request (reducers) to signup goes in this button */}
-          <button onClick={() => this.signup()}>
+          <button onClick={() => this.props.signup()}>
             Signup
           </button>
           Already a user?
