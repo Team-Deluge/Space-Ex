@@ -12,27 +12,6 @@ const Event = sequelize.define('event', {
   title: {
     type: Sequelize.STRING,
   },
-  owner_user_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: User,
-      key: '_id',
-    },
-  },
-  renter_user_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: User,
-      key: '_id',
-    },
-  },
-  space_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Space,
-      key: '_id',
-    },
-  },
   start: {
     type: Sequelize.DATE,
   },
@@ -43,5 +22,9 @@ const Event = sequelize.define('event', {
     type: Sequelize.BOOLEAN,
   },
 });
+
+Event.belongsTo(User, { as: 'Owner' });
+Event.belongsTo(User, { as: 'Renter' });
+Event.belongsTo(Space);
 
 module.exports = Event;
