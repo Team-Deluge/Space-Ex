@@ -16,3 +16,4 @@ export const GET_PENDING_EVENTS = 'GET_PENDING_EVENTS';
 export const ADD_EVENT = 'ADD_EVENT';
 export const CONFIRM_EVENT = 'CONFIRM_EVENT';
 export const DELETE_EVENT = 'DELETE_EVENT';
+export const SIGN_UP = 'SIGN_UP';

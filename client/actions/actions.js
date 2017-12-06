@@ -4,6 +4,11 @@ import * as types from '../constants/actionTypes';
 
 // export action creators, which will be used by
 
+export const requestSignup = data => ({
+  type: types.SIGN_UP,
+  payload: data,
+});
+
 export const requestLogin = creds => ({
   type: types.LOGIN_REQUEST,
   isFetching: true,
