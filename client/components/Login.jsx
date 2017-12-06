@@ -1,22 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logoutUser } from '../actions/actions';
+import loginUser from '../actions/auth';
 
 const mapDispatchToProps = dispatch => ({
-  // reducers go here (login post request)
+  loginUser(userInfo) {
+    console.log(userInfo);
+    dispatch(loginUser(userInfo));
+  },
 });
+
+const mapStateToProps = () => ({});
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '' }
+    this.state = { username: '', password: '' };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(name, event) {
-    this.setState({ [name]: event.target.value })
+    this.setState({ [name]: event.target.value });
   }
-
 
   render() {
     return (
@@ -24,6 +31,7 @@ class Login extends React.Component {
         <h4>Login</h4>
         <h4>
           Username:
+
           <input
             type="text"
             value={this.state.username}
@@ -42,6 +50,7 @@ class Login extends React.Component {
 
           {/* login post request reducer to database goes here */}
           <button onClick={()=>console.log(this.state)}>
+
             Login
           </button>
           Not a user?
@@ -60,4 +69,5 @@ class Login extends React.Component {
   }
 }
 
-export default connect(mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
