@@ -1,34 +1,35 @@
+const Sequelize = require('sequelize');
 const sequelize = require('./sequelize');
 const User = require('./User');
 
 const Space = sequelize.define('space', {
   _id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   name: {
-    type: sequelize.STRING,
+    type: Sequelize.STRING,
   },
   location: {
-    type: sequelize.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   description: {
-    type: sequelize.TEXT,
+    type: Sequelize.TEXT,
     allowNull: false,
   },
   rating: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
   },
   picture: {
-    type: sequelize.STRING,
+    type: Sequelize.STRING,
   },
   tags: {
-    type: sequelize.ARRAY(sequelize.text),
+    type: Sequelize.ARRAY(sequelize.text),
   },
   owner_user_id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     references: {
       model: User,
       key: '_id',
