@@ -30,27 +30,6 @@ class Signup extends React.Component {
     this.setState({ [name]: event.target.value });
   }
 
-  // signup() {
-  //   const config = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({
-  //       userName: this.state.username,
-  //       password: this.state.password,
-  //       email: this.state.email,
-  //       phone: this.state.phone,
-  //       user: this.state.userType,
-  //     }),
-  //   };
-
-    // fetch('http://localhost:3000/signup', config)
-    //   .then((response) => {
-    //     response.json()
-    //       .then(data => console.log(data));
-    //   }).catch(err => console.log(err));
-  // }
-
-
   render() {
     const config = {
       method: 'POST',
