@@ -19,7 +19,7 @@ class Login extends React.Component {
         <h4>Login</h4>
         <h4>
           Username:
-          <input type="text" value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
+          <input type="text" value={this.state.username} onChange={() => this.handleChange('username')} />
         </h4>
         <h4>
           Password:

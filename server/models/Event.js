@@ -3,7 +3,7 @@ const sequelize = require('./sequelize');
 const User = require('./User');
 const Space = require('./Space');
 
-const Event = sequelize.define('space', {
+const Event = sequelize.define('event', {
   _id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
