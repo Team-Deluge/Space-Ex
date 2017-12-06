@@ -5,6 +5,7 @@ import OwnerRes from '../components/OwnerRes';
 // import * as actions from '../actions/actions';
 
 const mapStateToProps = store => ({
+  // hard coded state !! remove !!
   username: 'ownerman',
   reservationList: [],
   spaces: [],

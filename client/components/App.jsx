@@ -9,6 +9,7 @@ import Login from './Login';
 
 const App = () => (
   <div id="app">
+    {/* delete this */}
     This is APP!
     <Switch>
       <Route exact path="/" component={Login} />
