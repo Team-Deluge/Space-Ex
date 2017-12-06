@@ -25565,15 +25565,152 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(22);
 
+var _actions = __webpack_require__(119);
+
+var types = _interopRequireWildcard(_actions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 // each reducer should have its initial state within its js file.
 // Use a default parameter to pass this into reducer.
 // reducers take the current state and an action object as parameters.
 // reducers then have a switch statement with cases for each action type (from actionTypes.js).
+// import all reducer js files
+function auth() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    isFetching: false,
+    isAuthenticated: localStorage.getItem('id_token')
+  };
+  var action = arguments[1];
+
+  switch (action.type) {
+    case types.LOGIN_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: false,
+        user: action.creds
+      });
+    case types.LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: true,
+        errorMessage: ''
+      });
+    case types.LOGIN_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: false,
+        errorMessage: action.message
+      });
+    case types.LOGOUT_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: false
+      });
+    default:
+      return state;
+  }
+}
 
 var reducers = (0, _redux.combineReducers)({
   // list all reducers here
-}); // import all reducer js files
+  auth: auth
+});
+
 exports.default = reducers;
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.logoutUser = exports.receiveLogout = exports.requestLogout = exports.loginError = exports.receiveLogin = exports.requestLogin = undefined;
+
+var _actionTypes = __webpack_require__(120);
+
+var types = _interopRequireWildcard(_actionTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// export action creators, which will be used by
+
+var requestLogin = exports.requestLogin = function requestLogin(creds) {
+  return {
+    type: types.LOGIN_REQUEST,
+    isFetching: true,
+    isAuthenticated: false,
+    payload: creds
+  };
+}; // this file contains all Action Creator functions; It imports action types from actionTypes.js
+
+var receiveLogin = exports.receiveLogin = function receiveLogin(user) {
+  return {
+    type: types.LOGIN_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    payload: user.id_token
+  };
+};
+
+var loginError = exports.loginError = function loginError(message) {
+  return {
+    type: types.LOGIN_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    payload: message
+  };
+};
+
+var requestLogout = exports.requestLogout = function requestLogout() {
+  return {
+    type: types.LOGOUT_REQUEST,
+    isFetching: true,
+    isAuthenticated: true
+  };
+};
+
+var receiveLogout = exports.receiveLogout = function receiveLogout() {
+  return {
+    type: types.LOGOUT_SUCCESS,
+    isFetching: false,
+    isAuthenticated: false
+  };
+};
+
+var logoutUser = exports.logoutUser = function logoutUser() {
+  return function (dispatch) {
+    dispatch(requestLogout());
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('access_token');
+    dispatch(receiveLogout());
+  };
+};
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// add action type constants i.e.:
+// const ACTION_DESCRIPTION = 'ACTION_DESCRIPTION';
+// export all action types, which will be used by actions.js
+
+var LOGIN_REQUEST = exports.LOGIN_REQUEST = 'LOGIN_REQUEST';
+var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+var LOGIN_FAILURE = exports.LOGIN_FAILURE = 'LOGIN_FAILURE';
+var LOGOUT_REQUEST = exports.LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+var LOGOUT_SUCCESS = exports.LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+var LOGOUT_FAILURE = exports.LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 /***/ })
 /******/ ]);
