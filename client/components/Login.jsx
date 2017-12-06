@@ -30,7 +30,6 @@ class Login extends React.Component {
         <h4>Login</h4>
         <h4>
           Username:
-
           <input
             type="text"
             value={this.state.username}
