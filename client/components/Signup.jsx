@@ -26,7 +26,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div id="signUp">
+      <div id="sign-up">
         <h3>Signup</h3>
         <h4>
           Username:
