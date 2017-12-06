@@ -6,7 +6,7 @@ const Message = require('../models/Message');
 const findConfirmedEvents = (req, res) => {
   Event.findAll({
     where: {
-      renter_user_id: req.body.user_id,
+      RenterId: req.body.renter_user_id,
       confirmed: true,
     },
   }).then((data) => {
@@ -17,7 +17,7 @@ const findConfirmedEvents = (req, res) => {
 const findPendingEvents = (req, res) => {
   Event.findAll({
     where: {
-      renter_user_id: req.body.user_id,
+      RenterId: req.body.renter_user_id,
       confirmed: false,
     },
   }).then((data) => {
@@ -25,18 +25,16 @@ const findPendingEvents = (req, res) => {
   });
 };
 
-const createEvent = (req, res) => {
+const createEvent = (req, res, next) => {
   Event.create({
     title: req.body.title,
-    owner_user_id: req.body.owner_user_id,
-    renter_user_id: req.body.renter_user_id,
-    space_id: req.body.space_id,
+    OwnerId: req.body.owner_user_id,
+    RenterId: req.body.renter_user_id,
+    spaceId: req.body.space_id,
     start: req.body.start,
     end: req.body.end,
     confirmed: false,
-  }).then((data) => {
-    res.json(data);
-  });
+  }).then(next());
 };
 
 const deleteEvent = (req, res) => {
@@ -53,7 +51,7 @@ const deleteEvent = (req, res) => {
 
 const findMessages = (req, res) => {
   Message.findAll({
-    where: { renter_user_id: req.body.user_id },
+    where: { RenterId: req.body.renter_user_id },
   }).then((data) => {
     res.json(data);
   });
@@ -61,9 +59,9 @@ const findMessages = (req, res) => {
 
 const createMessage = (req, res) => {
   Message.create({
-    owner_user_id: req.body.owner_user_id,
-    renter_user_id: req.body.renter_user_id,
-    space_id: req.body.space_id,
+    OwnerId: req.body.owner_user_id,
+    RenterId: req.body.renter_user_id,
+    spaceId: req.body.space_id,
     message: req.body.message,
   }).then((data) => {
     res.json(data);
