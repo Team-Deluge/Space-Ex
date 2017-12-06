@@ -1,14 +1,18 @@
-const { Route, Switch, Link } = require('react-router-dom');
-const React = require('react');
-const Signup = require('./Signup');
-const OwnerContainer = require('../containers/OwnerContainer');
-const RenterContainer = require('../containers/RenterContainer');
-const Login = require('./Login');
+
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import React from 'react';
+import Signup from './Signup';
+import OwnerContainer from '../containers/OwnerContainer';
+import RenterContainer from '../containers/RenterContainer';
+import Login from './Login';
 
 const App = () => (
   <div>
+    This is APP!
     <Switch>
       <Route exact path="/" component={Login} />
+      <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/owner" component={OwnerContainer} />
       <Route path="/renter" component={RenterContainer} />
