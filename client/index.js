@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import App from './components/App';
-import store from './store';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const { BrowserRouter } = require('react-router-dom');
+const { Provider } = require('react-redux');
+const App = require('./components/App');
+const store = require('./store');
 
 
 ReactDOM.render(
@@ -12,5 +12,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('contents'),
+  document.getElementById('app'),
 );

@@ -3380,37 +3380,27 @@ function verifyPlainObject(value, displayName, methodName) {
 "use strict";
 
 
-var _react = __webpack_require__(1);
+var React = __webpack_require__(1);
+var ReactDOM = __webpack_require__(51);
 
-var _react2 = _interopRequireDefault(_react);
+var _require = __webpack_require__(30),
+    BrowserRouter = _require.BrowserRouter;
 
-var _reactDom = __webpack_require__(51);
+var _require2 = __webpack_require__(87),
+    Provider = _require2.Provider;
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
+var App = __webpack_require__(112);
+var store = __webpack_require__(117);
 
-var _reactRouterDom = __webpack_require__(30);
-
-var _reactRedux = __webpack_require__(87);
-
-var _App = __webpack_require__(112);
-
-var _App2 = _interopRequireDefault(_App);
-
-var _store = __webpack_require__(117);
-
-var _store2 = _interopRequireDefault(_store);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_reactDom2.default.render(_react2.default.createElement(
-  _reactRedux.Provider,
-  { store: _store2.default },
-  _react2.default.createElement(
-    _reactRouterDom.BrowserRouter,
+ReactDOM.render(React.createElement(
+  Provider,
+  { store: store },
+  React.createElement(
+    BrowserRouter,
     null,
-    _react2.default.createElement(_App2.default, null)
+    React.createElement(App, null)
   )
-), document.getElementById('contents'));
+), document.getElementById('app'));
 
 /***/ }),
 /* 49 */
@@ -25460,46 +25450,38 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _require = __webpack_require__(30),
+    Route = _require.Route,
+    Switch = _require.Switch,
+    Link = _require.Link;
 
-var _reactRouterDom = __webpack_require__(30);
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Signup = __webpack_require__(113);
-
-var _Signup2 = _interopRequireDefault(_Signup);
-
-var _OwnerContainer = __webpack_require__(114);
-
-var _OwnerContainer2 = _interopRequireDefault(_OwnerContainer);
-
-var _RenterContainer = __webpack_require__(115);
-
-var _RenterContainer2 = _interopRequireDefault(_RenterContainer);
-
-var _Login = __webpack_require__(116);
-
-var _Login2 = _interopRequireDefault(_Login);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var React = __webpack_require__(1);
+var Signup = __webpack_require__(113);
+var OwnerContainer = __webpack_require__(114);
+var RenterContainer = __webpack_require__(115);
+var Login = __webpack_require__(116);
 
 var App = function App() {
-  return _react2.default.createElement(
-    _reactRouterDom.Switch,
+  return React.createElement(
+    'div',
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Login2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _Signup2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/owner', component: _OwnerContainer2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/renter', component: _RenterContainer2.default })
+    React.createElement(
+      'div',
+      null,
+      ' CAN YOU SEE ME ? '
+    ),
+    React.createElement(
+      Switch,
+      null,
+      React.createElement(Route, { exact: true, path: '/', component: Login }),
+      React.createElement(Route, { path: '/signup', component: Signup }),
+      React.createElement(Route, { path: '/owner', component: OwnerContainer }),
+      React.createElement(Route, { path: '/renter', component: RenterContainer })
+    )
   );
 };
 
-exports.default = App;
+module.exports = App;
 
 /***/ }),
 /* 113 */
@@ -25507,6 +25489,61 @@ exports.default = App;
 
 "use strict";
 
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = __webpack_require__(1);
+
+var Signup = function (_React$Component) {
+  _inherits(Signup, _React$Component);
+
+  function Signup() {
+    _classCallCheck(this, Signup);
+
+    return _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).apply(this, arguments));
+  }
+
+  _createClass(Signup, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      fetch('/signup', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userName: 'testUser',
+          password: 'testPassword',
+          email: 'testEmail@gmail.com',
+          phone: '555-555-5555',
+          user: 'renter',
+          rating: 4.4
+        })
+      }).then(function (data) {
+        console.log(data);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        'this is a signup pabe'
+      );
+    }
+  }]);
+
+  return Signup;
+}(React.Component);
+
+module.exports = Signup;
 
 /***/ }),
 /* 114 */

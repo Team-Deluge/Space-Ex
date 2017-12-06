@@ -1,45 +1,46 @@
+const Sequelize = require('sequelize');
 const sequelize = require('./sequelize');
 const User = require('./User');
 const Space = require('./Space');
 
 const Event = sequelize.define('space', {
   _id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   title: {
-    type: sequelize.STRING,
+    type: Sequelize.STRING,
   },
   owner_user_id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     references: {
       model: User,
       key: '_id',
     },
   },
   renter_user_id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     references: {
       model: User,
       key: '_id',
     },
   },
   space_id: {
-    type: sequelize.INTEGER,
+    type: Sequelize.INTEGER,
     references: {
       model: Space,
       key: '_id',
     },
   },
   start: {
-    type: sequelize.DATE,
+    type: Sequelize.DATE,
   },
   end: {
-    type: sequelize.DATE,
+    type: Sequelize.DATE,
   },
   confirmed: {
-    type: sequelize.BOOLEAN,
+    type: Sequelize.BOOLEAN,
   },
 });
 
