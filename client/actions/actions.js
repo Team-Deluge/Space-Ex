@@ -43,3 +43,19 @@ export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('access_token');
   dispatch(receiveLogout());
 };
+
+export const getSpaces = user_id => ({
+  type: types.GET_SPACES,
+  user_id,
+});
+
+export const deleteSpace = (space_id, user_id) => ({
+  type: types.DELETE_SPACE,
+  space_id,
+  user_id,
+});
+
+export const addSpace = user_id => ({
+  type: types.ADD_SPACE,
+  user_id,
+});

@@ -1,6 +1,7 @@
 // import all reducer js files
 import { combineReducers } from 'redux';
 import * as types from '../actions/actions';
+import spaceReducer from './spaceReducer';
 
 // each reducer should have its initial state within its js file.
 // Use a default parameter to pass this into reducer.
@@ -42,6 +43,7 @@ function auth(state = {
 const reducers = combineReducers({
   // list all reducers here
   auth,
+  spaceReducer,
 });
 
 
