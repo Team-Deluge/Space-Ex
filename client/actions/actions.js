@@ -46,23 +46,30 @@ export const logoutUser = () => (dispatch) => {
 
 export const getSpaces = user_id => ({
   type: types.GET_SPACES,
-  user_id,
+  payload: { user_id },
 });
 
 export const deleteSpace = (space_id, user_id) => ({
   type: types.DELETE_SPACE,
-  space_id,
-  user_id,
+  payload: { space_id, user_id },
 });
 
 export const addSpace = user_id => ({
   type: types.ADD_SPACE,
-  user_id,
+  payload: { user_id },
 });
 
 export const getConfirmedEvents = (user_id, userType) => ({
   type: types.GET_CONFIRMED_EVENTS,
-  user_id,
-  userType,
+  payload: { user_id, userType },
 });
 
+export const getPendingEvents = (user_id, userType) => ({
+  type: types.GET_PENDING_EVENTS,
+  payload: { user_id, userType },
+});
+
+export const addEvent = data => ({
+  type: types.ADD_EVENT,
+  payload: data,
+});

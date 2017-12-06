@@ -7,7 +7,7 @@ const Message = require('../models/Message');
 const findConfirmedEvents = (req, res) => {
   Event.findAll({
     where: {
-      OwnerID: req.body.user_id,
+      OwnerId: req.body.owner_user_id,
       confirmed: true,
     },
   }).then((data) => {
@@ -18,7 +18,7 @@ const findConfirmedEvents = (req, res) => {
 const findPendingEvents = (req, res) => {
   Event.findAll({
     where: {
-      OwnerID: req.body.user_id,
+      OwnerId: req.body.owner_user_id,
       confirmed: false,
     },
   }).then((data) => {
@@ -56,7 +56,7 @@ const deleteEvent = (req, res) => {
 
 const findSpaces = (req, res) => {
   Space.findAll({
-    where: { OwnerID: req.body.user_id },
+    where: { userId: req.body.owner_user_id },
   }).then((data) => {
     res.json(data);
   });
@@ -70,7 +70,7 @@ const addSpace = (req, res, next) => {
     rating: req.body.rating,
     picture: req.body.picture,
     tags: req.body.tags,
-    OwnerID: req.body.owner_user_id,
+    userId: req.body.owner_user_id,
   }).then(next());
 };
 
@@ -86,7 +86,7 @@ const deleteSpace = (req, res, next) => {
 
 const findMessages = (req, res) => {
   Message.findAll({
-    where: { OwnerID: req.body.user_id },
+    where: { OwnerId: req.body.owner_user_id },
   }).then((data) => {
     res.json(data);
   });
@@ -94,9 +94,9 @@ const findMessages = (req, res) => {
 
 const createMessage = (req, res) => {
   Message.create({
-    OwnerID: req.body.owner_user_id,
-    RenterID: req.body.renter_user_id,
-    space_id: req.body.space_id,
+    OwnerId: req.body.owner_user_id,
+    RenterId: req.body.renter_user_id,
+    spaceId: req.body.space_id,
     message: req.body.message,
   }).then((data) => {
     res.json(data);
