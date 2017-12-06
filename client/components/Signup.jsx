@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 const mapDispatchToProps = dispatch => ({
   // reducers go here (signup post request)
+  dispatch(signup)
 });
 
 class Signup extends React.Component {
@@ -15,12 +16,34 @@ class Signup extends React.Component {
       password: '',
       email: '',
       phone: '',
-      userType: 'Owner'
+      userType: 'Owner',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.signup = this.signup.bind(this);
   }
+
   handleChange(name, event) {
-    this.setState({ [name]: event.target.value })
+    this.setState({ [name]: event.target.value });
+  }
+
+  signup() {
+    const config = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userName: this.state.username,
+        password: this.state.password,
+        email: this.state.email,
+        phone: this.state.phone,
+        user: this.state.userType,
+      }),
+    };
+
+    fetch('http://localhost:3000/signup', config)
+      .then((response) => {
+        response.json()
+          .then(data => console.log(data));
+      }).catch(err => console.log(err));
   }
 
 
@@ -71,7 +94,7 @@ class Signup extends React.Component {
           <br />
 
           {/* post request (reducers) to signup goes in this button */}
-          <button onClick={()=>console.log(this.state)}>
+          <button onClick={() => this.signup()}>
             Signup
           </button>
           Already a user?
