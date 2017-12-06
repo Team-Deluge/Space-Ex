@@ -25851,42 +25851,74 @@ var _OwnerSpaces = __webpack_require__(117);
 
 var _OwnerSpaces2 = _interopRequireDefault(_OwnerSpaces);
 
+var _actions = __webpack_require__(15);
+
+var actions = _interopRequireWildcard(_actions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import * as actions from '../actions/actions';
+// const mapStateToProps = store => ({
+//   totalMarkets: store.markets.totalMarkets,
+//   totalCards: store.cards.totalCards
+// });
 
 var mapStateToProps = function mapStateToProps(store) {
   return {
+    spaces: store.spaceReducer.spaces
+
     // hard coded state !! remove !!
-    username: 'ownerman',
-    reservationList: 'reslist'.split(''),
-    pending: 'pendinglist'.split(''),
-    spaces: [{
-      _id: 1,
-      name: 'codesmath',
-      location: 'player a vister',
-      description: 'ver noice',
-      rating: '42',
-      picture: 'https://memegenerator.net/img/instances/500x/62087528/pls-hurry.jpg',
-      tags: { wifi: true, noiseTolerance: 'high' }
-    }, {
-      _id: 2,
-      name: 'denksmith',
-      location: 'a pimp named slickback',
-      description: 'sikkkk',
-      rating: '69',
-      picture: 'http://i0.kym-cdn.com/photos/images/masonry/001/217/695/0fb.jpg',
-      tags: { wifi: false, noiseTolerance: 'low' }
-    }]
+    // username: 'ownerman',
+
+    // reservationList: 'reslist'.split(''),
+    // pending: 'pendinglist'.split(''),
+    // spaces: [{
+    // _id: 1,
+    //   name: 'codesmath',
+    //   location: 'player a vister',
+    //   description: 'ver noice',
+    //   rating: '42',
+    //   picture: 'https://memegenerator.net/img/instances/500x/62087528/pls-hurry.jpg',
+    //   tags: { wifi: true, noiseTolerance: 'high' },
+    // },
+    // {
+    //   _id: 2,
+    //   name: 'denksmith',
+    //   location: 'a pimp named slickback',
+    //   description: 'sikkkk',
+    //   rating: '69',
+    //   picture: 'http://i0.kym-cdn.com/photos/images/masonry/001/217/695/0fb.jpg',
+    //   tags: { wifi: false, noiseTolerance: 'low' },
+    // }],
+
+
   };
 };
 
 // const mapDispatchToProps = dispatch => ({
-//
+//   addMarket: location => dispatch(actions.addMarket(location)),
+//   addCard: id => dispatch(actions.addCard(id)),
+//   deleteCard: id => dispatch(actions.deleteCard(id))
 // });
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getSpaces: function getSpaces(userId) {
+      return dispatch(actions.getSpaces(userId));
+    },
+    deleteSpace: function deleteSpace(spaceId, userId) {
+      return dispatch(actions.getSpaces(spaceId, userId));
+    },
+    addSpace: function addSpace(userId) {
+      return dispatch(actions.getSpaces(userId));
+    }
+  };
+};
+
 var OwnerContainer = function OwnerContainer(props) {
-  console.log(props);
+  // console.log('this is owner container')
+  // console.log(props.spaces)
   return _react2.default.createElement(
     'div',
     { className: 'owner-container' },
@@ -25897,18 +25929,19 @@ var OwnerContainer = function OwnerContainer(props) {
       pending: props.pending
     }),
     _react2.default.createElement(_OwnerSpaces2.default, {
-      spaces: props.spaces
+      spaces: props.spaces,
+      deleteSpace: props.deleteSpace
     }),
     _react2.default.createElement(
       _reactRouterDom.Link,
-      { to: '/createspace' },
+      { to: { pathname: '/createspace', state: { id: props._id } } },
       'Create a Space!'
     )
   );
 };
 
 // add mapDispatchToProps
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(OwnerContainer);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(OwnerContainer);
 
 /***/ }),
 /* 116 */
@@ -26382,6 +26415,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(6);
 
+var _reactRedux = __webpack_require__(7);
+
+var _actions = __webpack_require__(15);
+
+var actions = _interopRequireWildcard(_actions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -26392,15 +26433,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    addSpace: function addSpace(userId) {
+      return dispatch(actions.getSpaces(userId));
+    }
+  };
+};
 // after creating, redirect to success >>> owner dash
-// const CreateSpace = (props) => {
-//   return (
-//     <div>
-//       this is Create Space
-//       <Link to='/owner'>Back to OwnerDash!</Link>
-//     </div>
-//   );
-// }
 
 var CreateSpace = function (_React$Component) {
   _inherits(CreateSpace, _React$Component);
@@ -26435,6 +26475,8 @@ var CreateSpace = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      // console.log(this.props.location.state)
+      // console.log(this.props.addSpace)
       return _react2.default.createElement(
         'div',
         { id: 'create-space' },
@@ -26510,7 +26552,7 @@ var CreateSpace = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick() {
-                return console.log(_this2.state);
+                return _this2.props.addSpace(_this2.props.location.id);
               } },
             'Create!'
           ),
@@ -26534,7 +26576,7 @@ var CreateSpace = function (_React$Component) {
 
 // export default connect(mapDispatchToProps)(Signup);
 
-exports.default = CreateSpace;
+exports.default = (0, _reactRedux.connect)(mapDispatchToProps)(CreateSpace);
 
 /***/ }),
 /* 125 */
