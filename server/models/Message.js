@@ -9,30 +9,13 @@ const Message = sequelize.define('message', {
     primaryKey: true,
     autoIncrement: true,
   },
-  owner_user_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: User,
-      key: '_id',
-    },
-  },
-  renter_user_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: User,
-      key: '_id',
-    },
-  },
-  space_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Space,
-      key: '_id',
-    },
-  },
   message: {
     type: Sequelize.TEXT,
   },
 });
+
+Message.belongsTo(User, { as: 'Renter' });
+Message.belongsTo(User, { as: 'Owner' });
+Message.belongsTo(Space);
 
 module.exports = Message;

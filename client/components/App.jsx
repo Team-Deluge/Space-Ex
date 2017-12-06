@@ -6,6 +6,7 @@ import Signup from './Signup';
 import OwnerContainer from '../containers/OwnerContainer';
 import RenterContainer from '../containers/RenterContainer';
 import Login from './Login';
+import CreateSpace from './CreateSpace'
 
 const App = () => (
   <div id="app">
@@ -17,6 +18,7 @@ const App = () => (
       <Route path="/signup" component={Signup} />
       <Route path="/owner" component={OwnerContainer} />
       <Route path="/renter" component={RenterContainer} />
+      <Route path="/createspace" component={CreateSpace} />
     </Switch>
   </div>
 );

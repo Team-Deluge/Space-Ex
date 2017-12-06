@@ -26,15 +26,10 @@ const Space = sequelize.define('space', {
     type: Sequelize.STRING,
   },
   tags: {
-    type: Sequelize.ARRAY(sequelize.text),
-  },
-  owner_user_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: User,
-      key: '_id',
-    },
+    type: Sequelize.ARRAY(Sequelize.TEXT),
   },
 });
+
+Space.belongsTo(User);
 
 module.exports = Space;

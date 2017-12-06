@@ -48,7 +48,6 @@ class Login extends React.Component {
 
           {/* login post request reducer to database goes here */}
           <button onClick={() => this.props.loginUser({ username: this.state.username, password: this.state.password })}>
-
             Login
           </button>
           Not a user?
@@ -68,4 +67,3 @@ class Login extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-

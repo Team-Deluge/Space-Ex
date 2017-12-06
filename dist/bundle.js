@@ -25586,6 +25586,10 @@ var _Login = __webpack_require__(119);
 
 var _Login2 = _interopRequireDefault(_Login);
 
+var _CreateSpace = __webpack_require__(128);
+
+var _CreateSpace2 = _interopRequireDefault(_CreateSpace);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -25600,7 +25604,8 @@ var App = function App() {
       _react2.default.createElement(_reactRouterDom.Route, { path: '/login', component: _Login2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _Signup2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/owner', component: _OwnerContainer2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/renter', component: _RenterContainer2.default })
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/renter', component: _RenterContainer2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/createspace', component: _CreateSpace2.default })
     )
   );
 };
@@ -25641,6 +25646,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     // reducers go here (signup post request)
+    signup: dispatch.signup
   };
 };
 
@@ -25660,6 +25666,7 @@ var Signup = function (_React$Component) {
       userType: 'Owner'
     };
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.signup = _this.signup.bind(_this);
     return _this;
   }
 
@@ -25669,13 +25676,36 @@ var Signup = function (_React$Component) {
       this.setState(_defineProperty({}, name, event.target.value));
     }
   }, {
+    key: 'signup',
+    value: function signup() {
+      var config = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userName: this.state.username,
+          password: this.state.password,
+          email: this.state.email,
+          phone: this.state.phone,
+          user: this.state.userType
+        })
+      };
+
+      fetch('http://localhost:3000/signup', config).then(function (response) {
+        response.json().then(function (data) {
+          return console.log(data);
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
         'div',
-        { id: 'signUp' },
+        { id: 'sign-up' },
         _react2.default.createElement(
           'h3',
           null,
@@ -25757,7 +25787,7 @@ var Signup = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick() {
-                return console.log(_this2.state);
+                return _this2.props.signup();
               } },
             'Signup'
           ),
@@ -25794,9 +25824,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(6);
 
+var _reactRouterDom = __webpack_require__(13);
+
 var _OwnerRes = __webpack_require__(116);
 
 var _OwnerRes2 = _interopRequireDefault(_OwnerRes);
+
+var _OwnerSpaces = __webpack_require__(126);
+
+var _OwnerSpaces2 = _interopRequireDefault(_OwnerSpaces);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25806,31 +25842,55 @@ var mapStateToProps = function mapStateToProps(store) {
   return {
     // hard coded state !! remove !!
     username: 'ownerman',
-    reservationList: [],
-    spaces: [],
-    pending: []
+    reservationList: 'reslist'.split(''),
+    pending: 'pendinglist'.split(''),
+    spaces: [{
+      _id: 1,
+      name: 'codesmath',
+      location: 'player a vister',
+      description: 'ver noice',
+      rating: '42',
+      picture: 'https://memegenerator.net/img/instances/500x/62087528/pls-hurry.jpg',
+      tags: { wifi: true, noiseTolerance: 'high' }
+    }, {
+      _id: 2,
+      name: 'denksmith',
+      location: 'a pimp named slickback',
+      description: 'sikkkk',
+      rating: '69',
+      picture: 'http://i0.kym-cdn.com/photos/images/masonry/001/217/695/0fb.jpg',
+      tags: { wifi: false, noiseTolerance: 'low' }
+    }]
   };
 };
 
+// const mapDispatchToProps = dispatch => ({
+//
+// });
+
 var OwnerContainer = function OwnerContainer(props) {
-  console.log('inside owner container');
+  console.log(props);
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'owner-container' },
+    props.username,
+    ' Container',
+    _react2.default.createElement(_OwnerRes2.default, {
+      reservationList: props.reservationList,
+      pending: props.pending
+    }),
+    _react2.default.createElement(_OwnerSpaces2.default, {
+      spaces: props.spaces
+    }),
     _react2.default.createElement(
-      'h2',
-      null,
-      'Welcome Owner ',
-      props.username,
-      ' !!!'
-    ),
-    _react2.default.createElement(_OwnerRes2.default
-    // put in props here
-    , { reservationList: props.reservationList
-    })
+      _reactRouterDom.Link,
+      { to: '/createspace' },
+      'Create a Space!'
+    )
   );
 };
 
+// add mapDispatchToProps
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(OwnerContainer);
 
 /***/ }),
@@ -25851,15 +25911,12 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var OwnerRes = function OwnerRes(props) {
-  console.log(props.reservationList);
+  // console.log('INSIDE OWNER RES')
+  // console.log(props)
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(
-      'h2',
-      null,
-      'This is OwnerRes !!!'
-    )
+    'this be ownerres'
   );
 };
 
@@ -26134,8 +26191,8 @@ var _actions = __webpack_require__(26);
 var loginUser = function loginUser(creds) {
   var config = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'username=' + creds.username + '&password=' + creds.password
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: creds.username, password: creds.password })
   };
 
   return function (dispatch) {
@@ -26143,19 +26200,12 @@ var loginUser = function loginUser(creds) {
 
     return fetch('http://localhost:3000/user/find', config).then(function (response) {
       response.json().then(function (user) {
-        return { user: user, response: response };
-      }).then(function (_ref) {
-        var user = _ref.user,
-            res = _ref.res;
-
-        if (!res.ok) {
-          dispatch((0, _actions.loginError)(user.message));
+        if (!user) {
+          dispatch((0, _actions.loginError)('Error'));
           return Promise.reject(user);
         }
 
         localStorage.setItem('id_token', user.id_token);
-        localStorage.setItem('id_token', user.access_token);
-
         dispatch((0, _actions.receiveLogin)(user));
       }).catch(function (err) {
         return console.log(err);
@@ -26353,6 +26403,313 @@ var spaceReducer = function spaceReducer() {
 };
 
 exports.default = spaceReducer;
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _SingleSpace = __webpack_require__(127);
+
+var _SingleSpace2 = _interopRequireDefault(_SingleSpace);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// if no spaces write a message
+var OwnerSpaces = function OwnerSpaces(props) {
+  console.log('INSIDE OWNER SPACES');
+  console.log(props.spaces);
+
+  // description: "ver noice"
+  // location: "player a vister"
+  // name: "codesmath"
+  // picture: "https://memegenerator.net/img/instances/500x/62087528/pls-hurry.jpg"
+  // rating: "42"
+  // tags: {wifi: true, noiseTolerance: "high"}
+
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'owner-spaces' },
+    props.spaces.map(function (obj, i) {
+      return _react2.default.createElement(_SingleSpace2.default, {
+        key: i,
+        id: obj._id,
+        name: obj.name,
+        description: obj.description,
+        location: obj.location,
+        picture: obj.picture,
+        rating: obj.rating,
+        tags: obj.tags
+      });
+    })
+  );
+};
+
+exports.default = OwnerSpaces;
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SingleSpace = function SingleSpace(props) {
+  console.log('INSIDE SINGLE SPACES');
+  console.log(props.id);
+  // id: 1
+  // description: "ver noice"
+  // location: "player a vister"
+  // name: "codesmath"
+  // picture: "https://memegenerator.net/img/instances/500x/62087528/pls-hurry.jpg"
+  // rating: "42"
+  // tags: {wifi: true, noiseTolerance: "high"}
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'single-space' },
+    _react2.default.createElement(
+      'h3',
+      null,
+      ' ',
+      props.name,
+      ' '
+    ),
+    _react2.default.createElement(
+      'h4',
+      null,
+      ' ',
+      props.location,
+      ' '
+    ),
+    _react2.default.createElement('img', { className: 'space-img', src: props.picture }),
+    _react2.default.createElement(
+      'p',
+      null,
+      ' ',
+      props.description,
+      ' '
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      ' Rating: ',
+      props.rating,
+      ' '
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      'Wifi: ',
+      props.tags.wifi,
+      ' , Noise Tolerance: ',
+      props.tags.noiseTolerance
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return console.log('delete button pressed');
+        } },
+      'Delete'
+    )
+  );
+};
+
+exports.default = SingleSpace;
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(13);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// after creating, redirect to success >>> owner dash
+// const CreateSpace = (props) => {
+//   return (
+//     <div>
+//       this is Create Space
+//       <Link to='/owner'>Back to OwnerDash!</Link>
+//     </div>
+//   );
+// }
+
+var CreateSpace = function (_React$Component) {
+  _inherits(CreateSpace, _React$Component);
+
+  function CreateSpace(props) {
+    _classCallCheck(this, CreateSpace);
+
+    // owner_user_id should come from props
+    // auto set rating?
+    var _this = _possibleConstructorReturn(this, (CreateSpace.__proto__ || Object.getPrototypeOf(CreateSpace)).call(this, props));
+
+    _this.state = {
+      name: '',
+      location: '',
+      description: '',
+      rating: 0,
+      picture: '',
+      tags: '',
+      owner_user_id: ''
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(CreateSpace, [{
+    key: 'handleChange',
+    value: function handleChange(name, event) {
+      this.setState(_defineProperty({}, name, event.target.value));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { id: 'create-space' },
+        _react2.default.createElement(
+          'h3',
+          null,
+          'Create Space'
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Space Name:',
+          _react2.default.createElement('input', {
+            type: 'text',
+            value: this.state.name,
+            onChange: function onChange(e) {
+              return _this2.handleChange('name', e);
+            }
+          })
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Location:',
+          _react2.default.createElement('input', {
+            type: 'text',
+            value: this.state.location,
+            onChange: function onChange(e) {
+              return _this2.handleChange('location', e);
+            }
+          })
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Description:',
+          _react2.default.createElement('input', {
+            type: 'text',
+            value: this.state.description,
+            onChange: function onChange(e) {
+              return _this2.handleChange('description', e);
+            }
+          })
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Picture Link:',
+          _react2.default.createElement('input', {
+            type: 'text',
+            value: this.state.picture,
+            onChange: function onChange(e) {
+              return _this2.handleChange('picture', e);
+            }
+          })
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Tags:',
+          _react2.default.createElement('input', {
+            type: 'text',
+            value: this.state.tags,
+            onChange: function onChange(e) {
+              return _this2.handleChange('tags', e);
+            }
+          })
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            { onClick: function onClick() {
+                return console.log(_this2.state);
+              } },
+            'Create!'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Changed your mind?'
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/owner' },
+            'Back to dashboard'
+          )
+        )
+      );
+    }
+  }]);
+
+  return CreateSpace;
+}(_react2.default.Component);
+
+// export default connect(mapDispatchToProps)(Signup);
+
+exports.default = CreateSpace;
 
 /***/ })
 /******/ ]);
