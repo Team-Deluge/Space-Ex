@@ -1,16 +1,14 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions';
 
+
+const mapDispatchToProps = dispatch => ({
+  addSpace: userId => dispatch(actions.getSpaces(userId)),
+});
 // after creating, redirect to success >>> owner dash
-// const CreateSpace = (props) => {
-//   return (
-//     <div>
-//       this is Create Space
-//       <Link to='/owner'>Back to OwnerDash!</Link>
-//     </div>
-//   );
-// }
 
 class CreateSpace extends React.Component {
   constructor(props) {
@@ -34,6 +32,8 @@ class CreateSpace extends React.Component {
 
 
   render() {
+    // console.log(this.props.location.state)
+    // console.log(this.props.addSpace)
     return (
       <div id="create-space">
         <h3>Create Space</h3>
@@ -81,7 +81,7 @@ class CreateSpace extends React.Component {
           <br />
 
           {/* post request (reducers) to signup goes in this button */}
-          <button onClick={()=>console.log(this.state)}>
+          <button onClick={() => this.props.addSpace(this.props.location.id)}>
             Create!
           </button>
 
@@ -95,4 +95,4 @@ class CreateSpace extends React.Component {
 
 // export default connect(mapDispatchToProps)(Signup);
 
-export default CreateSpace;
+export default connect(mapDispatchToProps)(CreateSpace);
