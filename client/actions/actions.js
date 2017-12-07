@@ -74,7 +74,24 @@ export const getPendingEvents = (user_id, userType) => ({
   payload: { user_id, userType },
 });
 
-export const addEvent = data => ({
+export const addEvent = (title, owner_user_id, renter_user_id, space_id, start, end) => ({
   type: types.ADD_EVENT,
-  payload: data,
+  payload: {
+    title,
+    owner_user_id,
+    renter_user_id,
+    space_id,
+    start,
+    end,
+  },
+});
+
+export const deleteEvent = (event_id, user_id, userType) => ({
+  type: types.DELETE_EVENT,
+  payload: { event_id, user_id, userType },
+});
+
+export const confirmEvent = (event_id, user_id) => ({
+  type: types.CONFIRM_EVENT,
+  payload: { event_id, user_id },
 });
