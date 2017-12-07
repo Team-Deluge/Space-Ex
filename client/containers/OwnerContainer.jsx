@@ -1,9 +1,10 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import OwnerRes from '../components/OwnerRes'
 import OwnerSpaces from '../components/OwnerSpaces'
+import Logout from '../components/Logout';
 import * as actions from '../actions/actions';
 
 
@@ -14,7 +15,8 @@ import * as actions from '../actions/actions';
 
 const mapStateToProps = store => ({
   spaces: store.spaceReducer.spaces,
-  id: localStorage.id_token,
+  isAuthenticated: store.auth.isAuthenticated,
+
 
 
   // hard coded state !! remove !!
@@ -73,7 +75,9 @@ const OwnerContainer = (props) => {
         spaces={props.spaces}
         deleteSpace={props.deleteSpace}
       />
-      <Link to={{pathname:'/createspace', state:{id:props.id}}}>Create a Space!</Link>
+      <Link to={{pathname:'/createspace', state:{id:props._id}}}>Create a Space!</Link>
+      {props.isAuthenticated === true && <Logout />}
+      {props.isAuthenticated === false && <Redirect to="/" />}
     </div>
   );
 }
