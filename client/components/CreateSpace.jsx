@@ -23,7 +23,7 @@ class CreateSpace extends React.Component {
       rating: 0,
       picture: '',
       tags: '',
-      owner_user_id: '',
+      owner_user_id: localStorage.id_token,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -83,13 +83,7 @@ class CreateSpace extends React.Component {
 
           {/* post request (reducers) to signup goes in this button */}
           <button onClick={() => this.props.addSpace(
-            this.state.name,
-            this.state.location,
-            this.state.description,
-            this.state.rating,
-            this.state.picture,
-            this.state.tags,
-            this.state.owner_user_id
+            this.state
           )}>
             Create!
           </button>
