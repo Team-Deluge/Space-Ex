@@ -1,6 +1,10 @@
 * {
   font-family: "Open Sans";
 }
+
+#app{
+  background: tomato;
+}
 div {
   display: flex;
   /*justify-content: center;*/

@@ -8,10 +8,20 @@ import RenterContainer from '../containers/RenterContainer';
 import Login from './Login';
 import CreateSpace from './CreateSpace'
 
+// ITERATION NOTES:
+
+// PSQL ACCOUNT
+// user: deluge
+// password: password
+// database name: spaceex
+
+// successful signup and login generates a token that holds the _id from the sequelize database
+// the reducers have NOT been tested and need to be worked on
+
 const App = () => (
   <div id="app">
-    {/* delete this */}
-    This is APP!
+    <h1>Space Ex!</h1>
+
     <Switch>
       <Route exact path="/" component={Login} />
       <Route path="/login" component={Login} />
