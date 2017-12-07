@@ -27,4 +27,10 @@ app.post('/getPendingEventsRenter', RenterDashController.findPendingEvents);
 
 app.post('/addEvent', RenterDashController.createEvent, RenterDashController.findPendingEvents);
 
+app.post('/deleteEventRenter', RenterDashController.deleteEvent, RenterDashController.findPendingEvents);
+
+app.post('/deleteEventOwner', OwnerDashController.deleteEvent, OwnerDashController.findPendingEvents);
+
+app.post('/confirmEvent', OwnerDashController.confirmEvent, OwnerDashController.findPendingEvents);
+
 app.listen(3000);
