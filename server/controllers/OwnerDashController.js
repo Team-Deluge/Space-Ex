@@ -51,21 +51,30 @@ const deleteEvent = (req, res, next) => {
 // SPACE CONTROLLERS
 
 const findSpaces = (req, res) => {
+  console.log('inside findspaces!!!')
   Space.findAll({
     where: { userId: req.body.owner_user_id },
   }).then((data) => {
+    console.log('THIS IS DATA')
+    console.log(data)
     res.json(data);
   });
 };
 
 const addSpace = (req, res, next) => {
+  console.log('REQ BODY START')
+  req.body = req.body.name
+
+  console.log(req.body)
+  console.log('REQ BODY END')
+
   Space.create({
     name: req.body.name,
     location: req.body.location,
     description: req.body.description,
     rating: req.body.rating,
     picture: req.body.picture,
-    tags: req.body.tags,
+    tags: req.body.tags.split(' '),
     userId: req.body.owner_user_id,
   }).then(next());
 };
