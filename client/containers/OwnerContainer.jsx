@@ -14,6 +14,7 @@ import * as actions from '../actions/actions';
 
 const mapStateToProps = store => ({
   spaces: store.spaceReducer.spaces,
+  id: localStorage.id_token,
 
 
   // hard coded state !! remove !!
@@ -59,6 +60,8 @@ const mapDispatchToProps = dispatch => ({
 const OwnerContainer = (props) => {
   // console.log('this is owner container')
   // console.log(props.spaces)
+  console.log('this is id token')
+  console.log(localStorage.id_token)
   return (
     <div className='owner-container'>
       {props.username} Container
@@ -70,7 +73,7 @@ const OwnerContainer = (props) => {
         spaces={props.spaces}
         deleteSpace={props.deleteSpace}
       />
-      <Link to={{pathname:'/createspace', state:{id:props._id}}}>Create a Space!</Link>
+      <Link to={{pathname:'/createspace', state:{id:props.id}}}>Create a Space!</Link>
     </div>
   );
 }
