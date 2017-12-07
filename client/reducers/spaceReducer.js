@@ -20,7 +20,15 @@ const spaceReducer = (state = { spaces: [] }, action) => {
       fetch('/addSpace', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ owner_user_id: action.user_id }),
+        body: JSON.stringify({
+          name: action.payload.name,
+          location: action.payload.location,
+          description: action.payload.description,
+          rating: action.payload.rating,
+          picture: action.payload.picture,
+          tags: action.payload.tags,
+          owner_user_id: action.payload.user_id,
+        }),
       }).then(spaces => Object.assign({}, state, { spaces }));
       break;
     default:

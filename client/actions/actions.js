@@ -59,9 +59,17 @@ export const deleteSpace = (space_id, user_id) => ({
   payload: { space_id, user_id },
 });
 
-export const addSpace = user_id => ({
+export const addSpace = (name, location, description, rating, picture, tags, user_id) => ({
   type: types.ADD_SPACE,
-  payload: { user_id },
+  payload: {
+    name,
+    location,
+    description,
+    rating,
+    picture,
+    tags,
+    user_id,
+  },
 });
 
 export const getConfirmedEvents = (user_id, userType) => ({
