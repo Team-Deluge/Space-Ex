@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/actions';
 import loginUser from '../actions/auth';
@@ -11,7 +11,9 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = () => ({});
+const mapStateToProps = store => ({
+  isAuthenticated: store.auth.isAuthenticated,
+});
 
 class Login extends React.Component {
   constructor(props) {
@@ -59,7 +61,7 @@ class Login extends React.Component {
           <Link to='/owner'>OwnerContainer</Link>
           <br/>
           <Link to='/renter'>RenterContainer</Link>
-
+          {this.props.isAuthenticated === true && <Redirect to="/owner" />}
         </h4>
       </div>
     )
