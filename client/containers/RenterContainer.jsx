@@ -5,6 +5,7 @@ import RenterRes from '../components/RenterRes'
 // import * as actions from '../actions/actions';
 
 const mapStateToProps = store => ({
+  // hard coded state
   username: 'renterman'
 });
 
@@ -19,6 +20,7 @@ const RenterContainer = (props) => {
       <RenterRes
         // put in props here
       />
+
     </div>
   );
 }
