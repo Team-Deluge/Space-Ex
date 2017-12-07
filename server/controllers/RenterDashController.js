@@ -37,14 +37,12 @@ const createEvent = (req, res, next) => {
   }).then(next());
 };
 
-const deleteEvent = (req, res) => {
+const deleteEvent = (req, res, next) => {
   Event.findOne({
     where: { _id: req.body.event_id },
   }).then((event) => {
     event.destroy({ force: true });
-  }).then((data) => {
-    res.json(data);
-  });
+  }).then(next());
 };
 
 // MESSAGE CONTROLLERS

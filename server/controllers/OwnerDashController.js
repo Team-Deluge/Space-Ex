@@ -26,15 +26,13 @@ const findPendingEvents = (req, res) => {
   });
 };
 
-const confirmEvent = (req, res) => {
+const confirmEvent = (req, res, next) => {
   Event.findOne({
     where: { _id: req.body.event_id },
   }).then((event) => {
     event.update({
       confirmed: true,
-    }).then((data) => {
-      res.json(data);
-    });
+    }).then(next());
   });
 };
 
@@ -42,14 +40,12 @@ const confirmEvent = (req, res) => {
 // use event's _id to update the unconfirmed table (or just have items in the table disappear on
 // button press)
 
-const deleteEvent = (req, res) => {
+const deleteEvent = (req, res, next) => {
   Event.findOne({
     where: { _id: req.body.event_id },
   }).then((event) => {
     event.destroy({ force: true });
-  }).then((data) => {
-    res.json(data);
-  });
+  }).then(next());
 };
 
 // SPACE CONTROLLERS

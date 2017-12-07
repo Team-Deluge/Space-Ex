@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-  addSpace: userId => dispatch(actions.getSpaces(userId)),
+  addSpace: userId => dispatch(actions.addSpace(userId)),
 });
 // after creating, redirect to success >>> owner dash
 
@@ -81,7 +82,15 @@ class CreateSpace extends React.Component {
           <br />
 
           {/* post request (reducers) to signup goes in this button */}
-          <button onClick={() => this.props.addSpace(this.props.location.id)}>
+          <button onClick={() => this.props.addSpace(
+            this.state.name,
+            this.state.location,
+            this.state.description,
+            this.state.rating,
+            this.state.picture,
+            this.state.tags,
+            this.state.owner_user_id
+          )}>
             Create!
           </button>
 
@@ -95,4 +104,4 @@ class CreateSpace extends React.Component {
 
 // export default connect(mapDispatchToProps)(Signup);
 
-export default connect(mapDispatchToProps)(CreateSpace);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateSpace);

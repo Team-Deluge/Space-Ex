@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import * as types from '../constants/actionTypes';
 import spaceReducer from './spaceReducer';
 import signupReducer from './userReducer';
+import eventReducer from './eventReducer';
 
 // each reducer should have its initial state within its js file.
 // Use a default parameter to pass this into reducer.
@@ -46,6 +47,7 @@ const reducers = combineReducers({
   auth,
   spaceReducer,
   signupReducer,
+  eventReducer,
 });
 
 

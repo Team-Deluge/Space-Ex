@@ -18,6 +18,7 @@ const mapStateToProps = store => ({
   isAuthenticated: store.auth.isAuthenticated,
 
 
+
   // hard coded state !! remove !!
   // username: 'ownerman',
 
@@ -61,6 +62,8 @@ const mapDispatchToProps = dispatch => ({
 const OwnerContainer = (props) => {
   // console.log('this is owner container')
   // console.log(props.spaces)
+  console.log('this is id token')
+  console.log(localStorage.id_token)
   return (
     <div className='owner-container'>
       {props.username} Container

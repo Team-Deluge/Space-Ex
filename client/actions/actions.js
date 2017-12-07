@@ -58,9 +58,17 @@ export const deleteSpace = (space_id, user_id) => ({
   payload: { space_id, user_id },
 });
 
-export const addSpace = user_id => ({
+export const addSpace = (name, location, description, rating, picture, tags, user_id) => ({
   type: types.ADD_SPACE,
-  payload: { user_id },
+  payload: {
+    name,
+    location,
+    description,
+    rating,
+    picture,
+    tags,
+    user_id,
+  },
 });
 
 export const getConfirmedEvents = (user_id, userType) => ({
@@ -73,7 +81,24 @@ export const getPendingEvents = (user_id, userType) => ({
   payload: { user_id, userType },
 });
 
-export const addEvent = data => ({
+export const addEvent = (title, owner_user_id, renter_user_id, space_id, start, end) => ({
   type: types.ADD_EVENT,
-  payload: data,
+  payload: {
+    title,
+    owner_user_id,
+    renter_user_id,
+    space_id,
+    start,
+    end,
+  },
+});
+
+export const deleteEvent = (event_id, user_id, userType) => ({
+  type: types.DELETE_EVENT,
+  payload: { event_id, user_id, userType },
+});
+
+export const confirmEvent = (event_id, user_id) => ({
+  type: types.CONFIRM_EVENT,
+  payload: { event_id, user_id },
 });
